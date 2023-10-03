@@ -4,6 +4,7 @@
 // init project
 require('dotenv').config();
 var express = require('express');
+var path = require('path');
 var app = express();
 
 // enable CORS (https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
@@ -12,13 +13,13 @@ var cors = require('cors');
 app.use(cors({ optionsSuccessStatus: 200 })); // some legacy browsers choke on 204
 
 // http://expressjs.com/en/starter/static-files.html
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.set('trust proxy', true);
 
 // http://expressjs.com/en/starter/basic-routing.html
 app.get('/', function (req, res) {
-  res.sendFile(__dirname + '/views/index.html');
+  res.sendFile(path.join(__dirname, 'views', 'index.html'));
 });
 
 // your first API endpoint...
